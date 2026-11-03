@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: ap-agent-backend
+    runtime: docker
+    rootDir: backend
+    dockerfilePath: Dockerfile
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - key: SARVAM_API_KEY
+        sync: false
+      - key: ALLOWED_ORIGINS
+        value: "https://ap-agent.vercel.app,http://localhost:5173"
+      - key: DATABASE_URL
+        value: "sqlite:///./data/ap_agent.db"
+      - key: SARVAM_BASE_URL
+        value: "https://api.sarvam.ai/v1"
+      - key: SARVAM_MODEL
+        value: "sarvam-105b-conversations"
