@@ -79,3 +79,4 @@ export const api = {
     return `${API_BASE_URL}/api/reviews/${id}/report`;
   }
 };
+

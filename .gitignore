@@ -1,10 +1,12 @@
 # Environment variables & secrets (NEVER COMMIT)
 .env
 *.env
+.env.*
 .env.local
 .env.*.local
 backend/.env
 frontend/.env
+frontend/.env.production
 
 # Python
 __pycache__/
@@ -55,3 +57,4 @@ Thumbs.db
 *.swo
 .vscode/
 .idea/
+
