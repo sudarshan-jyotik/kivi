@@ -16,8 +16,9 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy application source code
+# Copy application source code and bundled samples
 COPY app/ ./app/
+COPY samples/ ./samples/
 
 # Create data directory for SQLite
 RUN mkdir -p /app/data
@@ -28,3 +29,4 @@ ENV PYTHONUNBUFFERED=1
 EXPOSE 8000
 
 CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}"]
+

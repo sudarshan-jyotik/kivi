@@ -14,7 +14,14 @@ router = APIRouter(prefix="/demo", tags=["Demo"])
 # Determine samples directory path
 BACKEND_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 PROJECT_ROOT = os.path.dirname(BACKEND_DIR)
-SAMPLES_DIR = os.path.join(PROJECT_ROOT, "samples")
+
+CANDIDATE_DIRS = [
+    os.path.join(BACKEND_DIR, "samples"),
+    os.path.join(PROJECT_ROOT, "samples"),
+    "/app/samples",
+    "./samples"
+]
+SAMPLES_DIR = next((d for d in CANDIDATE_DIRS if os.path.exists(d)), os.path.join(PROJECT_ROOT, "samples"))
 
 
 @router.post("/{sample_number}", response_model=ReviewResponse)
@@ -109,3 +116,4 @@ async def run_demo_sample(sample_number: int, db: Session = Depends(get_db)):
     db.refresh(review)
 
     return review
+
